@@ -43,7 +43,7 @@ router.post('/user/register', (req, res, next) => {
             return
         }
 
-        //对面进行md5加密
+        //对密码进行md5加密
         password = md5(md5(password))
 
         //用户未被注册则将数据保存到数据库

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const userSchams = require('../schemas/users')
+const userSchema = require('../schemas/users')
 
 //导出用户表模型
-module.exports = mongoose.model('User',userSchams)
+module.exports = mongoose.model('User',userSchema)

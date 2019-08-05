@@ -14,19 +14,21 @@ $(function () {
     })
 
     //用户注册
-    $('#registerBox').find('button').on('click', function () {
+    $('#registerBox').find('[type="button"]').on('click', function () {
         $.ajax({
             type: 'post',
             url: '/api/user/register',
             //获取表单数据
-            data: {
-                username: $('#registerBox').find('[name="username"]').val(),
-                password: $('#registerBox').find('[name="password"]').val(),
-                repassword: $('#registerBox').find('[name="repassword"]').val(),
-
-            },
+            // data: {
+            //     username: $('#registerBox').find('[name="username"]').val(),
+            //     password: $('#registerBox').find('[name="password"]').val(),
+            //     repassword: $('#registerBox').find('[name="repassword"]').val(),
+            //
+            // },
+            data: $('#register_form').serialize() ,
             dataType: 'json',
             success: function (res) {
+
                 $('#registerBox').find('.colWarning').html(res.message)
                 if (res.code === 5) {
                     setTimeout(function () {
@@ -39,14 +41,16 @@ $(function () {
     })
 
     //用户登录
-    $('#loginBox').find('button').on('click', function () {
+    $('#loginBox').find('[type="button"]').on('click', function () {
         $.ajax({
             type: 'post',
             url: '/api/user/login',
-            data: {
-                username: $('#loginBox').find('[name="username"]').val(),
-                password: $('#loginBox').find('[name="password"]').val(),
-            },
+            // data: {
+            //     username: $('#loginBox').find('[name="username"]').val(),
+            //     password: $('#loginBox').find('[name="password"]').val(),
+            // },
+            //获取表单数据
+            data:$('#login_form').serialize(),
             dataType: 'json',
             success: function (res) {
                 $('#loginBox').find('.colWarning').html(res.message)

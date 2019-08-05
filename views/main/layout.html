@@ -45,11 +45,13 @@
         {{else}}
         <div class="rightBox" id="loginBox">
             <div class="title"><span>登录</span></div>
-            <div class="line"><span class="colDark">用户名：</span><input name="username" type="text"/><em></em></div>
-            <div class="line"><span class="colDark">密码：</span><input name="password" type="password"/><em></em></div>
-            <div class="line"><span class="colDark"></span>
-                <button>登 录</button>
-            </div>
+            <form id="login_form">
+                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text"/><em></em></div>
+                <div class="line"><span class="colDark">密码：</span><input name="password" type="password"/><em></em></div>
+                <div class="line"><span class="colDark"></span>
+                    <input type="button"  value="登录" class="button">
+                </div>
+            </form>
             <p class="textRight">还没注册？<a href="javascript:;" class="colMint">马上注册</a>　</p>
             <p class="colWarning textCenter"></p>
         </div>
@@ -57,12 +59,14 @@
 
         <div class="rightBox" id="registerBox" style="display: none">
             <div class="title"><span>注册</span></div>
-            <div class="line"><span class="colDark">用户名：</span><input name="username" type="text"/></div>
-            <div class="line"><span class="colDark">密码：</span><input name="password" type="password"/></div>
-            <div class="line"><span class="colDark">确认：</span><input name="repassword" type="password"/></div>
-            <div class="line"><span class="colDark"></span>
-                <button>注 册</button>
-            </div>
+            <form id="register_form">
+                <div class="line"><span class="colDark">用户名：</span><input name="username" type="text"/></div>
+                <div class="line"><span class="colDark">密码：</span><input name="password" type="password"/></div>
+                <div class="line"><span class="colDark">确认：</span><input name="repassword" type="password"/></div>
+                <div class="line"><span class="colDark"></span>
+                    <input type="button" value="注册" class="button">
+                </div>
+            </form>
             <p class="textRight">已有账号？<a href="javascript:;" class="colMint">马上登录</a>　</p>
             <p class="colWarning textCenter"></p>
         </div>

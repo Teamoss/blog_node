@@ -318,7 +318,7 @@ main .mainRight .rightBox .line input {
   background: none;
   padding: 0px 5px;
 }
-main .mainRight .rightBox .line button {
+main .mainRight .rightBox .line .button {
   background: #e67e22;
   width: 222px;
   height: 34px;
