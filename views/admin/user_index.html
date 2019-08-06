@@ -15,6 +15,7 @@
         <th>用户名</th>
         <th>密码</th>
         <th>是否是管理员</th>
+        <th>操作</th>
     </tr>
 
     {{each userList}}
@@ -27,6 +28,13 @@
             是
             {{else}}
             否
+            {{/if}}
+        </td>
+        <td>
+            {{if $value.isAdmin}}
+            <a href="/admin/user/delete?id={{$value._id.toString()}}" class="btn btn-success disabled">管理员</a>
+            {{else}}
+            <a href="/admin/user/delete?id={{$value._id.toString()}}" class="btn btn-danger ">删除</a>
             {{/if}}
         </td>
     </tr>

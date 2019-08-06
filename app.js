@@ -44,7 +44,7 @@ app.use('/', require('./routers/main'));
 
 
 //连接数据库
-mongoose.connect('mongodb://localhost/blog', function(err) {
+mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true },function(err) {
     if (err) {
         console.log('数据库连接失败');
     } else {
