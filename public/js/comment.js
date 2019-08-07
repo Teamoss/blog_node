@@ -13,6 +13,7 @@ $(function () {
             success:function (res) {
                if(res.code === 5) {
                    $('#messageContent').val('')
+                   window.location.reload()
                }
             }
         })
