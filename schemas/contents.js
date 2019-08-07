@@ -13,6 +13,14 @@ module.exports = new mongoose.Schema({
         ref: 'Category'
     },
 
+    //关联字段-用户ID
+    user: {
+        //类型
+        type:mongoose.Schema.Types.ObjectId,
+        //引用
+        ref: 'User'
+    },
+
     //内容标题
     title:String,
     //简介
@@ -34,6 +42,11 @@ module.exports = new mongoose.Schema({
     views:{
         type:Number,
         default:''
+    },
+    //评论
+    comments:{
+        type:Array,
+        default:[]
     }
 })
 

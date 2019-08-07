@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
+const Content = require('../models/Content')
 const md5 = require('blueimp-md5')
+const dateFormat = require('../plugin/dateFormat')
 
 //定义统一返回格式
 const resData = {}
@@ -119,6 +121,41 @@ router.get('/user/logout', (req, res, next) => {
     resData.code = 6
     res.json(resData)
     return
+})
+
+
+//用户提交评论
+router.post('/comment', function (req, res, next) {
+
+    //获取评论文章ID
+    var contentId = req.body.contentId || ''
+
+    var postData = {
+        username: req.session.userInfo.username,
+        postTime: dateFormat(),
+        comment: req.body.comment
+    }
+
+    Content.findOne({
+        _id: contentId
+    }).then(content => {
+        content.comments.unshift(postData)
+        return content.save()
+
+    }).then(postCommentSuccess => {
+
+        if (!postCommentSuccess) {
+            resData.code = 3
+            resData.message = '评论失败'
+            res.json(resData)
+            return
+        }
+        resData.code = 5
+        resData.message = '评论成功'
+        res.json(resData)
+        return
+    })
+
 })
 
 module.exports = router

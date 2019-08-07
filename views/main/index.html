@@ -1,36 +1,41 @@
 {{extend './layout.html'}}
 
 {{block content}}
-<div class="listBox">
-    <h1>content.title</h1>
-    <p class="colDefault">
-        作者：<span class="colInfo">content.user.username</span> -
-        时间：<span class="colInfo">content.addTime|date</span> -
-        阅读：<span class="colInfo">content.views}}</span> -
-        评论：<span class="colInfo">content.comments.length</span>
-    </p>
-    <dfn><p>content.description</p></dfn>
-    <div class="function"><a href="#">阅读全文</a></div>
-</div>
 
+{{each contentList}}
+<div class="listBox">
+    <h1>{{$value.title}}</h1>
+    <p class="colDefault">
+        作者：<span class="colInfo">{{$value.user.username}}</span> -
+        发布时间：<span class="colInfo">{{$value.addTime}}</span> -
+        阅读：<span class="colInfo">{{$value.views||0}}</span> -
+        评论：<span class="colInfo">{{$value.comments.length}}</span>
+    </p>
+    <dfn><p>{{$value.description}}</p></dfn>
+    <div class="function"><a href="/view?content={{$value._id.toString()}}">阅读全文</a></div>
+</div>
+{{/each}}
 
 <div class="pager">
     <ul class="clear">
 
         <li class="previous">
-
-            <span>没有上一页了</span>
-            <a href="#">上一页</a>
-
+            {{if page<=1}}
+            <span></span>
+            {{else}}
+            <a href="/?category={{category}}&page={{page-1}}">上一页</a>
+            {{/if}}
         </li>
         <li>
-            <strong>pages</strong>
+            <strong>{{page}}/{{pages}}</strong>
         </li>
 
         <li class="next">
-
-            <span>没有下一页了</span>
-            <a href="#">下一页</a>
+            {{if page>=pages}}
+            <span></span>
+            {{else}}
+            <a href="/?category={{category}}&page={{page+1}}">下一页</a>
+            {{/if}}
         </li>
 
     </ul>

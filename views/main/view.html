@@ -1,37 +1,54 @@
-{{extend './layout.html}}
+{{extend './layout.html'}}
 
 {{block content}}
 
 <div class="listBox">
-    <h1>title}}</h1>
+    <h1>{{content.title}}</h1>
     <p class="colDefault">
-        作者：<span class="colInfo">username</span> -
-        时间：<span class="colInfo">date</span> -
-        阅读：<span class="colInfo">views</span> -
-        评论：<span class="colInfo">comments</span>
+        作者：<span class="colInfo">{{content.user.username}}</span> -
+        发布时间：<span class="colInfo">{{content.addTime}}</span> -
+        阅读：<span class="colInfo">{{content.views}}</span> -
+        评论：<span class="colInfo">{{content.comments.length}}</span>
     </p>
     <dfn>
-        content.content
+        {{content.content}}
     </dfn>
 </div>
 
 <div class="listBox message">
-    <h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">0</em> 条评论</span></h3>
+    <h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">{{content.comments.length}}</em> 条评论</span>
+    </h3>
 
+    {{if userInfo}}
+    <p class="textLeft">用户：{{userInfo.username}}</p>
+    {{/if}}
 
-    <p class="textLeft">zmouse</p>
+    {{if userInfo}}
     <p class="textLeft clear">
-        <textarea id="messageContent"></textarea>
-        <input type="hidden" id="contentId" value="content">
-        <button id="messageBtn" class="submit">提交</button>
+    <form id="commentInfo">
+        <textarea id="messageContent" name="comment"></textarea>
+        <input type="hidden" id="contentId" value="{{content._id.toString()}}" name="contentId">
+        <input type="button" id="messageBtn" class="submit" value="提交">
+    </form>
     </p>
+    {{else}}
+    <p class="bgDanger" style="line-height: 30px;">请登录发表评论！</p>
+    {{/if}}
 
-    <p class="bgDanger" style="line-height: 30px;">你还没有登录，请先登录！</p>
-
-
+    {{if comments.length===0}}
     <div class="messageList">
+        <div class="messageBox"><p>还没有留言</p></div>
     </div>
-
+    {{else}}
+    <div class="messageList">
+        {{each comments}}
+        <div class="messageBox">
+            <p class="name clear"><span class="fl">{{$value.username}}</span><span class="fr">{{$value.postTime}}</span></p>
+            <p>{{$value.comment}}</p>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
     <div class="pager">
         <ul class="clear">
             <li class="previous">
