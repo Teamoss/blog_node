@@ -50,20 +50,21 @@ router.get('/', function (req, res, next) {
     })
 })
 
-//渲染文章内容页面
+//渲染文章详细内容页面
 router.get('/view',function (req,res,next) {
 
     //获取内容ID
     var contentID = req.query.content || ''
+    var category = req.query.category || ''
+    data.category = category
     Content.findOne({
         _id:contentID
-    }).populate('user').then(content=>{
+    }).populate(['user','category']).then(content=>{
 
         data.content=content
-        data.comments = content.comments
         content.views++
         content.save()
-        res.render('./main/view.html',data)
+         res.render('./main/view.html',data)
     })
 
 })

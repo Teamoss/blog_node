@@ -8,6 +8,7 @@ const dateFormat = require('../plugin/dateFormat')
 //定义统一返回格式
 const resData = {}
 
+
 //用户注册
 router.post('/user/register', (req, res, next) => {
 
@@ -123,6 +124,18 @@ router.get('/user/logout', (req, res, next) => {
     return
 })
 
+//获取指定文章所有评论
+router.get('/comment', function (req, res, next) {
+
+    var contentId = req.query.content || ''
+    Content.findOne({
+        _id: contentId
+    }).then(contentInfo => {
+        resData.data = contentInfo
+        res.json(resData)
+    })
+})
+
 
 //用户提交评论
 router.post('/comment', function (req, res, next) {
@@ -152,6 +165,7 @@ router.post('/comment', function (req, res, next) {
         }
         resData.code = 5
         resData.message = '评论成功'
+        resData.data = postCommentSuccess
         res.json(resData)
         return
     })

@@ -16,7 +16,7 @@
 </div>
 
 <div class="listBox message">
-    <h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">{{content.comments.length}}</em> 条评论</span>
+    <h3 class="textLeft"><strong>评论</strong> <span class="em">一共有 <em id="messageCount">0</em> 条评论</span>
     </h3>
 
     {{if userInfo}}
@@ -32,34 +32,25 @@
     </form>
     </p>
     {{else}}
+    <input type="hidden" id="contents" value="{{content._id.toString()}}" name="contents">
     <p class="bgDanger" style="line-height: 30px;">请登录发表评论！</p>
     {{/if}}
 
-    {{if comments.length===0}}
     <div class="messageList">
-        <div class="messageBox"><p>还没有留言</p></div>
+       <!--评论内容区域-->
     </div>
-    {{else}}
-    <div class="messageList">
-        {{each comments}}
-        <div class="messageBox">
-            <p class="name clear"><span class="fl">{{$value.username}}</span><span class="fr">{{$value.postTime}}</span></p>
-            <p>{{$value.comment}}</p>
-        </div>
-        {{/each}}
+
+    <div class="pager">
+        <ul class="clear">
+            <li class="previous">
+                <a href="">上一页</a>
+            </li>
+            <li></li>
+            <li class="next">
+                <a href="">下一页</a>
+            </li>
+        </ul>
     </div>
-    {{/if}}
-    <!--<div class="pager">-->
-        <!--<ul class="clear">-->
-            <!--<li class="previous">-->
-                <!--<a href="">上一页</a>-->
-            <!--</li>-->
-            <!--<li></li>-->
-            <!--<li class="next">-->
-                <!--<a href="">下一页</a>-->
-            <!--</li>-->
-        <!--</ul>-->
-    <!--</div>-->
 
 
 </div>

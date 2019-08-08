@@ -12,7 +12,7 @@
         评论：<span class="colInfo">{{$value.comments.length}}</span>
     </p>
     <dfn><p>{{$value.description}}</p></dfn>
-    <div class="function"><a href="/view?content={{$value._id.toString()}}">阅读全文</a></div>
+    <div class="function"><a href="/view?category={{category}}&content={{$value._id.toString()}}">阅读全文</a></div>
 </div>
 {{/each}}
 
