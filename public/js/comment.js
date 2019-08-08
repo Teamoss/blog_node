@@ -40,10 +40,10 @@ $(function () {
     })
 
     //处理分页
-    $('.pager').delegate('a','click',function () {
-        if($(this).parent().hasClass('previous')){
+    $('.pager').delegate('a', 'click', function () {
+        if ($(this).parent().hasClass('previous')) {
             page--
-        }else{
+        } else {
             page++
         }
         loadComments()
@@ -59,24 +59,29 @@ $(function () {
         var $lis = $('.pager li')
         $lis.eq(1).html(`${page}/${pages}`)
         $('#messageCount').html(commentList.length)
-        if(page<=1){
-            page=1
+        if (page <= 1) {
+            page = 1
             $lis.eq(0).html('<span></span>');
-        }else {
+        } else {
             $lis.eq(0).html('<a href="javascript:;">上一页</a>');
         }
-        if(page>=pages){
-            page=pages
+        if (page >= pages) {
+            page = pages
             $lis.eq(2).html('<span></span>');
-        }else {
+        } else {
             $lis.eq(2).html('<a href="javascript:;">下一页</a>');
         }
-         if(commentList.length===0){
-             $('.messageList').html('<div class="messageBox"><p>还没有评论</p></div>');
-         }else{
-             var html = ''
-             for (let i = start; i < end; i++) {
-                 html += `<div class="messageBox">
+        commentList.forEach(item => {
+            if (item.comment === '') {
+                return item.comment = '吃瓜群众路过。。。'
+            }
+        })
+        if (commentList.length === 0) {
+            $('.messageList').html('<div class="messageBox"><p>还没有评论</p></div>');
+        } else {
+            var html = ''
+            for (let i = start; i < end; i++) {
+                html += `<div class="messageBox">
                 <p class="name clear">
                 <span class="fl" >用户: ${commentList[i].username}</span>
                 <span class="fr">评论时间: ${commentList[i].postTime}</span>
@@ -84,8 +89,8 @@ $(function () {
                 <p style="color: lightseagreen">${commentList[i].comment}</p>
             </div>
              <hr/>`
-             }
-             $('.messageList').html(html)
-         }
+            }
+            $('.messageList').html(html)
+        }
     }
 })
